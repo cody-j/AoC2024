@@ -15,54 +15,34 @@ int valid(int n, int p, bool asc) {
 }
 
 int main () {
-
     string line;
-    int safe_records = 0;
+
+    int ns = 0; // number of safe records
 
     while (getline(cin, line)) {
         stringstream ss(line);
-        bool safe = true;
-
-        int p; //
-        ss >> p;
-        int n; // current value
-        bool fc = true; // first comparison
-        bool asc = false;
-
-        int bad_levels = 0;
-        while (ss >> n) {
-            if (fc) {
-                if (n==p || n>p+3 || n <p-3) {
-                    if (bad_levels > 0) {
-                        safe = false;
-                        break;
-                    } else {
-                        bad_levels++;
-                        continue;
-                    }
-                }
-                if (n>p) {
-                    asc = true;
-                }
-                fc = false;
+        int ul = 0; // number of unsafe levels (max 1)
+        int a, b;
+        bool asc = false; // ascending
+        bool dk = false; // direction known
+        if (ss >> a >> b) {
+            int n = 0;
+            if (!valid(a, b, true) || !valid(a, b, false)) {
+                ul++;
+                continue;
             }
-            if (valid(n, p, asc)) {
-                p = n;
-            } else {
-                if (bad_levels > 0) {
-                    safe = false;
-                    break;
-                } else {
-                    bad_levels++;
-                    continue;
-                }
+            while (ss >> n) {
+                // neighbour doesn't work, try alternatives, finally accepting failure and moving on
+                if ()
+                //
+                // pass
             }
+        } else {
+            ns+=1;
+            continue;
         }
 
-        if (safe) {
-            safe_records++;
-        }
     }
-    cout << safe_records << endl;
-    return safe_records;
+    cout << ns << endl;
+    return ns;
 }
